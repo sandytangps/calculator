@@ -10,7 +10,7 @@ if selection not in (1, 2, 3, 4):
     print("Wrong selection.")
 else: 
     print(f"You have selected: {selection}")
-    num1 = int(input("Please provide your first value:\n"))
+    num1 = int(input("Please provide your first value laaaaaaa:\n"))
     num2 = int(input("Please provide your second value:\n"))
     if selection == 1:
         result = calculator.add(num1, num2)
