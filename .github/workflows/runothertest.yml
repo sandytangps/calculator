@@ -32,6 +32,11 @@ jobs:
           run: |
             curl https://github.com/Wpt006/calculator/blob/main/test_calculator.py -o test_Winni.py
 
+        - name: checkout my codes again
+          uses: actions/checkout@v4
+          with:
+              repository: sandytangps/calculator
+
         - name: List Content from Repo
           run: |
             pwd
