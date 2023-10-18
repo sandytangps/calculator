@@ -30,7 +30,7 @@ jobs:
           env: # if it is a hidden repo
             TOKEN: ${{ secrets.GITHUB_TOKEN }} #secrets.repo_token
           run: |
-            wget https://raw.githubusercontent.com/Wpt006/calculator/main/test_calculator.py -O test_Winni.py
+            curl https://raw.githubusercontent.com/HJ1174/python-calculator/main/test_calculator.py -O test_HJ2.py
 
         - name: List Content from Repo
           run: |
