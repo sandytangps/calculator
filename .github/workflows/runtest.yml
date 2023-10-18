@@ -31,3 +31,30 @@ jobs:
         - name: Start pytest Testing
           run: |
               pytest test_data.py -v -cov --junitxml=report.xml
+
+  
+        - name: List Content from Repo
+          run: |
+                pwd
+                ls
+            
+        - if: ${{ failure() }}
+          name: Create Issue on Failed workflow
+          uses: dacbd/create-issue-action@main
+          with:
+                token: ${{ github.token }}
+                title: Action Workflow Failed.
+                body: |
+                  ### Context
+                  [Failed Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+                  [Codebase](https://github.com/${{ github.repository }}/tree/${{ github.sha }})
+                  Workflow name - `${{ github.workflow }}`
+                  Job -           `${{ github.job }}`
+                  status -        `${{ job.status }}`
+                  assignees: sandy
+         
+        - name: Publish Test Results
+          uses: EnricoMi/publish-unit-test-result-action/composite@v2
+          if: always()
+          with:
+                junit_files: "report.xml"       
