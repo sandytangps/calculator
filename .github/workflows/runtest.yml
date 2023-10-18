@@ -4,6 +4,7 @@ on:
         branches: [main]
 
 jobs:
+    
     build:
         name: Run Tests
 
@@ -31,8 +32,8 @@ jobs:
           run: |
             curl https://github.com/HJ1174/python-calculator/blob/main/test_calculator.py -o test_data.py
 
-         - name: List Content from Repo
-           run: |
+        - name: List Content from Repo
+          run: |
             pwd
             ls
 
