@@ -23,10 +23,12 @@ jobs:
 
         - name: checkout my codes
           uses: actions/checkout@v4
+          with:
+            repository: sandytangps/calculator
 
         - name: Get TestScript from own Repository
           run: |
-            curl https://github.com/sandytangps/calculator/blob/1503ea105941b82e588b55facafc42854ff16896/test_calculator_new.py -o test_data.py
+            curl https://github.com/HJ1174/python-calculator/blob/main/test_calculator.py -o test_data.py
 
         - name: Start pytest Testing
           run: |
