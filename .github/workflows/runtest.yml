@@ -19,7 +19,7 @@ jobs:
 
         - name: Install Libraries
           run: |
-                pip install flake8 pytest pytest-cov robotframework      
+                pip install flake8 pytest pytest-cov    
 
         - name: checkout my codes
           uses: actions/checkout@v4
@@ -27,13 +27,19 @@ jobs:
             repository: sandytangps/calculator
 
         - name: Get TestScript from own Repository
+          #env: if it is a hidden repo
+          #  TOKEN: ${{ secrets.GITHUB_TOKEN }} #secrets.repo_token
           run: |
             curl https://github.com/HJ1174/python-calculator/blob/main/test_calculator.py -o test_data.py
+
+         - name: List Content from Repo
+           run: |
+            pwd
+            ls
 
         - name: Start pytest Testing
           run: |
               pytest test_data.py -v -cov --junitxml=report.xml
-
   
         - name: List Content from Repo
           run: |
