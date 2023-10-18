@@ -37,12 +37,12 @@ jobs:
       run: |
         pytest test_calculator_new.py -v -cov --junitxml=report.xml
 
-    - if: ${{ failure() }}
-      uses: JasonEtco/create-an-issue@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        filename: .github/ISSUE_TEMPLATE.md
+    # - if: ${{ failure() }}
+    #   uses: JasonEtco/create-an-issue@v2
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     filename: .github/ISSUE_TEMPLATE.md
   
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/composite@v2
@@ -76,8 +76,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       with:
-        tag_name: ${{ env.RELEASE_VERSION }}
-        release_name: Release ${{env.RELEASE_VERSION }}
+        tag_name: ${{env.RELEASE_VERSION}}
+        release_name: Release ${{env.RELEASE_VERSION}}
 
     - name: Archive Site Content
       uses: thedoctor0/zip-release@master
@@ -91,5 +91,5 @@ jobs:
       with:
         upload_url: ${{ steps.create-new-release.outputs.upload_url }}
         asset_path: ./content.zip
-        asset_name: ${{ env.RELEASE_VERSION }}.zip
+        asset_name: ${{env.RELEASE_VERSION}}.zip
         asset_content_type: applications/zip
