@@ -30,7 +30,7 @@ jobs:
           #env: if it is a hidden repo
           #  TOKEN: ${{ secrets.GITHUB_TOKEN }} #secrets.repo_token
           run: |
-            curl https://github.com/HJ1174/python-calculator/blob/main/test_calculator.py -o test_test.py
+            curl https://github.com/sandytangps/calculator/blob/main/test_calculator_new.py -o test_again.py
 
         - name: List Content from Repo
           run: |
@@ -39,7 +39,7 @@ jobs:
 
         - name: Start pytest Testing
           run: |
-              pytest test_test.py -v -cov --junitxml=report.xml
+              pytest test_again.py -v -cov --junitxml=report.xml
   
         - name: List Content from Repo
           run: |
