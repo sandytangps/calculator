@@ -1,0 +1,68 @@
+name: Run Other's Test
+on:
+    push:
+        branches: [main]
+
+jobs:
+    
+    build:
+        name: Run Other's Tests
+
+        runs-on: Ubuntu-latest
+
+        steps:
+
+        - name: set up python
+          uses: actions/setup-python@v4
+          with:
+            python-version: '3.10' 
+
+        - name: Install Libraries
+          run: |
+                pip install flake8 pytest pytest-cov pytest-md pytest-emoji
+
+        - name: checkout my codes
+          uses: actions/checkout@v4
+          with:
+            repository: sandytangps/calculator
+
+        - name: Get TestScript from own Repository
+          #env: if it is a hidden repo
+          #  TOKEN: ${{ secrets.GITHUB_TOKEN }} #secrets.repo_token
+          run: |
+            curl https://github.com/HJ1174/python-calculator/blob/main/test_calculator.py -o test_HJ.py
+
+        - name: List Content from Repo
+          run: |
+            pwd
+            ls
+
+        - name: Start pytest Testing
+          run: |
+              pytest test_HJ.py -v -cov --junitxml=report.xml
+  
+        - name: List Content from Repo
+          run: |
+                pwd
+                ls
+            
+        - if: ${{ failure() }}
+          name: Create Issue on Failed workflow
+          uses: dacbd/create-issue-action@main
+          with:
+                token: ${{ github.token }}
+                title: Action Workflow Failed.
+                body: |
+                  ### Context
+                  [Failed Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+                  [Codebase](https://github.com/${{ github.repository }}/tree/${{ github.sha }})
+                  Workflow name - `${{ github.workflow }}`
+                  Job -           `${{ github.job }}`
+                  status -        `${{ job.status }}`
+                  assignees: sandy
+
+        - name: Publish Test Results
+          uses: EnricoMi/publish-unit-test-result-action/composite@v2
+          if: always()
+          with:
+                junit_files: "report.xml"

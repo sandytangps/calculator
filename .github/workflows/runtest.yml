@@ -19,7 +19,7 @@ jobs:
 
         - name: Install Libraries
           run: |
-                pip install flake8 pytest pytest-cov    
+                pip install flake8 pytest pytest-cov pytest-md pytest-emoji
 
         - name: checkout my codes
           uses: actions/checkout@v4
@@ -61,18 +61,18 @@ jobs:
                   status -        `${{ job.status }}`
                   assignees: sandy
          
-        # - name: Publish Test Results
-        #   uses: EnricoMi/publish-unit-test-result-action/composite@v2
-        #   if: always()
-        #   with:
-        #         junit_files: "report.xml"       
-
-        - name: Run pytest
-          uses: pavelzw/pytest-action@v2
+        - name: Publish Test Results
+          uses: EnricoMi/publish-unit-test-result-action/composite@v2
+          if: always()
           with:
-                verbose: true
-                emoji: true
-                job-summary: true
-                custom-arguments: '-q'
-                click-to-expand: true
-                report-title: 'Test Report'
+                junit_files: "report.xml"       
+
+        # - name: Run pytest
+        #   uses: pavelzw/pytest-action@v2
+        #   with:
+        #         verbose: true
+        #         emoji: true
+        #         job-summary: true
+        #         custom-arguments: '-q'
+        #         click-to-expand: true
+        #         report-title: 'Test Report'
