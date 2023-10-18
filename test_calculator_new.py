@@ -34,7 +34,7 @@ def test_divide_1():
 def test_divide_2():
     assert round(calculator.divide(5,-3),2) == -1.67
 def test_divide_3():
-    assert calculator.divide(5,0) == "0 is not allowed"
+    assert calculator.divide(5,0) == "Cannot divide by zero"
 
 # using parametrize for a cleaner test case
 @pytest.mark.parametrize("num1,num2,expected_result",[(2,3,5),(-1,1,0),(-2,-3,-5)])
