@@ -39,7 +39,7 @@ jobs:
 
         - name: Start pytest Testing
           run: |
-              pytest test_data.py -v -cov --junitxml=report.xml
+              pytest test_test.py -v -cov --junitxml=report.xml
   
         - name: List Content from Repo
           run: |
