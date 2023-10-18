@@ -15,15 +15,16 @@ jobs:
 
     steps:
       
-    - uses: actions/checkout@v4
+    - name: set up python
+      uses: actions/setup-python@v4
       with:
-        python-version: 3.11
+        python-version: '3.10' 
 
     - name: Install Libraries
       run: |
-        pip install flake8 pytest pytest-cov
+        pip install flake8 pytest pytest-cov pytest-md pytest-emoji
 
-    - name: Checkout Own Repo
+    - name: checkout my codes
       uses: actions/checkout@v4
       with:
         repository: sandytangps/calculator
