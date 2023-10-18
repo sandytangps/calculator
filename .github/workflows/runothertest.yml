@@ -27,8 +27,8 @@ jobs:
             repository: sandytangps/calculator
 
         - name: Get TestScript from own Repository
-          env: # if it is a hidden repo
-            TOKEN: ${{ secrets.GITHUB_TOKEN }} #secrets.repo_token
+        #   env: # if it is a hidden repo
+        #     TOKEN: ${{ secrets.GITHUB_TOKEN }} #secrets.repo_token
           run: |
             curl https://raw.githubusercontent.com/HJ1174/python-calculator/main/test_calculator.py -O test_HJ2.py
 
