@@ -1,0 +1,33 @@
+name: Run Test
+on:
+    push:
+        branches: [main]
+
+jobs:
+    build:
+
+        name: Run Tests
+
+        runs-on: Ubuntu-latest
+
+        steps:
+
+        - name: set up python
+          uses: actions/setup-python@v4
+          with:
+            python-version: '3.10' 
+
+        - name: Install Libraries
+          run: |
+                pip install flake8 pytest pytest-cov robotframework      
+
+        - name: checkout my codes
+          uses: actions/checkout@v4
+
+        - name: Get TestScript from own Repository
+          run: |
+            curl -H https://github.com/sandytangps/calculator/blob/1503ea105941b82e588b55facafc42854ff16896/test_calculator_new.py -o test_data.py
+
+        - name: Start pytest Testing
+          run: |
+              pytest test_data.py -v -cov --junitxml=report.xml
